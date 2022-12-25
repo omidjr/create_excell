@@ -14,7 +14,7 @@ def get_data_from_api(data):
     market = data[1]
     stock_id = f"/{data[0]}"
     product_address = HERO_API_ADDRESS + market + stock_id
-    print(product_address)
+    # print(product_address)
     try:
         res = json.loads(requests.get(product_address, timeout=5).content)
         return res
