@@ -42,16 +42,19 @@ worksheet.write(row, col + 8, 'doc')
 
 row = 1
 for each_product in tqdm(last_products):
-    col = 0
-    # print(each_product['sku_id'])
-    worksheet.write(row, col, str(each_product['sku_id']))
-    worksheet.write(row, col + 1, str(each_product['skuid_hb']))
-    worksheet.write(row, col + 2, str(each_product['name']))
-    worksheet.write(row, col + 3, str(each_product['id']))
-    worksheet.write(row, col + 4, str(each_product['market']))
-    worksheet.write(row, col + 5, str(each_product['price']))
-    worksheet.write(row, col + 6, str(each_product['brand']))
-    worksheet.write(row, col + 7, str(each_product['modified_date']))
-    worksheet.write(row, col + 8, str(each_product['doc']))
-    row += 1
+    try:
+        col = 0
+        # print(each_product['sku_id'])
+        worksheet.write(row, col, str(each_product['sku_id']))
+        worksheet.write(row, col + 1, str(each_product['skuid_hb']))
+        worksheet.write(row, col + 2, str(each_product['name']))
+        worksheet.write(row, col + 3, str(each_product['id']))
+        worksheet.write(row, col + 4, str(each_product['market']))
+        worksheet.write(row, col + 5, str(each_product['price']))
+        worksheet.write(row, col + 6, str(each_product['brand']))
+        worksheet.write(row, col + 7, str(each_product['modified_date']))
+        worksheet.write(row, col + 8, str(each_product['doc']))
+        row += 1
+    except Exception as error:
+        print(error)
 workbook.close()

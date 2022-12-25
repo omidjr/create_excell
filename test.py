@@ -25,9 +25,7 @@ def get_data_from_api(data):
 
 def take_data_from_db():
     dynamic_price_data = []
-    query_sting = f''' 
-  select stock_id , market  from dynamic.product
-  '''
+    query_sting = f"select stock_id , market  from dynamic.product"
     cursor.execute(query_sting)
     cursors = cursor.fetchall()
 
@@ -35,6 +33,7 @@ def take_data_from_db():
         try:
             product = get_data_from_api(each)
             dynamic_price_data.append(product)
-        except:
+        except Exception as error:
+            print(error)
             pass
     return dynamic_price_data
