@@ -4,10 +4,10 @@ import requests
 from tqdm import tqdm
 
 conn_new = psycopg2.connect(database="narmoni", user='postgres', password='4rf#dfer53RF4#@',
-                            host='54.90.147.228', port='5432')
+                            host='172.31.24.65', port='5432')
 
 cursor = conn_new.cursor()
-HERO_API_ADDRESS = 'http://3.83.150.125:5000//data/dynamic/'
+HERO_API_ADDRESS = 'http://172.31.94.152:5000/data/dynamic/'
 
 
 def get_data_from_api(data):
