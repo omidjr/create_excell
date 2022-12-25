@@ -10,24 +10,21 @@ last_products = []
 #
 
 for each in tqdm(products):
-    product = dict()
-    product['doc'] = each
-    # if each['sku_id'] is None:
-    #     product['sku_id'] = ''
-    # else:
+    try:
+        product = dict()
+        product['doc'] = each
+        product['sku_id'] = each['sku_id']
+        product['skuid_hb'] = each['skuid_hb']
+        product['name'] = each['name']
+        product['id'] = each['id']
+        product['market'] = each['market']
+        product['price'] = each['price']
+        product['brand'] = each['brand']
+        product['modified_date'] = each['modified_date']
 
-    # print(each['sku_id'])
-
-    product['sku_id'] = each['sku_id']
-    product['skuid_hb'] = each['skuid_hb']
-    product['name'] = each['name']
-    product['id'] = each['id']
-    product['market'] = each['market']
-    product['price'] = each['price']
-    product['brand'] = each['brand']
-    product['modified_date'] = each['modified_date']
-
-    last_products.append(product)
+        last_products.append(product)
+    except Exception as error:
+        print(error)
 
 workbook = xlsxwriter.Workbook('Example3.xlsx')
 worksheet = workbook.add_worksheet("My sheet")

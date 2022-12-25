@@ -16,7 +16,7 @@ def get_data_from_api(data):
     product_address = HERO_API_ADDRESS + market + stock_id
     # print(product_address)
     try:
-        res = json.loads(requests.get(product_address, timeout=5).content)
+        res = json.loads(requests.get(product_address).content)
         return res
     except Exception as e:
         print(e)
