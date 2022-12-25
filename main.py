@@ -5,9 +5,45 @@ from test import take_data_from_db
 
 products = take_data_from_db()
 last_products = []
+index = 100000
+
 
 # skuid, skuid_hb, name, id, market, price, brand, last_midified_date
 #
+def write_to_excel(last_products):
+    workbook = xlsxwriter.Workbook('Example3.xlsx')
+    worksheet = workbook.add_worksheet("My sheet")
+    row = 0
+    col = 0
+    worksheet.write(row, col, 'sku_id')
+    worksheet.write(row, col + 1, 'skuid_hb')
+    worksheet.write(row, col + 2, 'name')
+    worksheet.write(row, col + 3, 'id')
+    worksheet.write(row, col + 4, 'market')
+    worksheet.write(row, col + 5, 'price')
+    worksheet.write(row, col + 6, 'brand')
+    worksheet.write(row, col + 7, 'modified_date')
+    worksheet.write(row, col + 8, 'doc')
+
+    row = 1
+    for each_product in tqdm(last_products):
+        try:
+            col = 0
+            # print(each_product['sku_id'])
+            worksheet.write(row, col, str(each_product['sku_id']))
+            worksheet.write(row, col + 1, str(each_product['skuid_hb']))
+            worksheet.write(row, col + 2, str(each_product['name']))
+            worksheet.write(row, col + 3, str(each_product['id']))
+            worksheet.write(row, col + 4, str(each_product['market']))
+            worksheet.write(row, col + 5, str(each_product['price']))
+            worksheet.write(row, col + 6, str(each_product['brand']))
+            worksheet.write(row, col + 7, str(each_product['modified_date']))
+            worksheet.write(row, col + 8, str(each_product['doc']))
+            row += 1
+        except Exception as error:
+            print(error)
+    workbook.close()
+
 
 for each in tqdm(products):
     try:
@@ -23,38 +59,8 @@ for each in tqdm(products):
         product['modified_date'] = each['modified_date']
 
         last_products.append(product)
+        if len(last_products) == index:
+            write_to_excel(last_products)
+            last_products.clear()
     except Exception as error:
         print(error)
-
-workbook = xlsxwriter.Workbook('Example3.xlsx')
-worksheet = workbook.add_worksheet("My sheet")
-row = 0
-col = 0
-worksheet.write(row, col, 'sku_id')
-worksheet.write(row, col + 1, 'skuid_hb')
-worksheet.write(row, col + 2, 'name')
-worksheet.write(row, col + 3, 'id')
-worksheet.write(row, col + 4, 'market')
-worksheet.write(row, col + 5, 'price')
-worksheet.write(row, col + 6, 'brand')
-worksheet.write(row, col + 7, 'modified_date')
-worksheet.write(row, col + 8, 'doc')
-
-row = 1
-for each_product in tqdm(last_products):
-    try:
-        col = 0
-        # print(each_product['sku_id'])
-        worksheet.write(row, col, str(each_product['sku_id']))
-        worksheet.write(row, col + 1, str(each_product['skuid_hb']))
-        worksheet.write(row, col + 2, str(each_product['name']))
-        worksheet.write(row, col + 3, str(each_product['id']))
-        worksheet.write(row, col + 4, str(each_product['market']))
-        worksheet.write(row, col + 5, str(each_product['price']))
-        worksheet.write(row, col + 6, str(each_product['brand']))
-        worksheet.write(row, col + 7, str(each_product['modified_date']))
-        worksheet.write(row, col + 8, str(each_product['doc']))
-        row += 1
-    except Exception as error:
-        print(error)
-workbook.close()
