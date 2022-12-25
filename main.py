@@ -45,15 +45,15 @@ for each_product in tqdm(last_products):
     try:
         col = 0
         # print(each_product['sku_id'])
-        worksheet.write(row, col, str(each_product['sku_id']))
-        worksheet.write(row, col + 1, str(each_product['skuid_hb']))
-        worksheet.write(row, col + 2, str(each_product['name']))
-        worksheet.write(row, col + 3, str(each_product['id']))
-        worksheet.write(row, col + 4, str(each_product['market']))
-        worksheet.write(row, col + 5, str(each_product['price']))
-        worksheet.write(row, col + 6, str(each_product['brand']))
-        worksheet.write(row, col + 7, str(each_product['modified_date']))
-        worksheet.write(row, col + 8, str(each_product['doc']))
+        worksheet.write(row, col, str(each_product['sku_id']).strip())
+        worksheet.write(row, col + 1, str(each_product['skuid_hb']).strip())
+        worksheet.write(row, col + 2, str(each_product['name']).strip())
+        worksheet.write(row, col + 3, str(each_product['id']).strip())
+        worksheet.write(row, col + 4, str(each_product['market']).strip())
+        worksheet.write(row, col + 5, str(each_product['price']).strip())
+        worksheet.write(row, col + 6, str(each_product['brand']).strip())
+        worksheet.write(row, col + 7, str(each_product['modified_date']).strip())
+        worksheet.write(row, col + 8, str(each_product['doc']).strip())
         row += 1
     except Exception as error:
         print(error)
